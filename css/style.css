@@ -1,0 +1,95 @@
+* { margin: 0px; padding: 0px; }
+
+html, body, div#container_player{
+    height: 100%;
+}
+
+body{
+    /*background: url("../disign/player.jpg") no-repeat;*/
+}
+
+div#container{
+    position: relative;
+}
+
+div#bar_bot_menu, div#btn_control_center, div#bar_controls,
+ul#container_btn_player{
+    position: absolute;
+}
+
+div#bar_bot_menu{
+    height: 40px;
+    background: url("../img/bg_bot_menu.png") repeat-x;
+    bottom: 0px;
+    width: 100%;
+}
+
+div#btn_control_center{
+    width: 172px;
+    height: 163px;
+    left: 50%;
+    margin-left: -86px;
+    top: 50%;
+    margin-top: -82px;
+    z-index: 100;
+}
+
+div#btn_control_center.play, div#btn_control_center.stop{
+    background: url("../img/btn_play.png") no-repeat;
+}
+
+ul#container_btn_player{
+    top: 22px;
+    left: 0px;
+    list-style-position: inside;
+    list-style-type: none;
+    width: 100%;
+    text-align: center;
+    z-index: 100;
+}
+
+ul#container_btn_player li{
+    width: 48px;
+    height: 66px;
+    display: inline-block;
+    background-position: center;
+    padding: 0px 13px;
+}
+
+ul#container_btn_player li.separator{
+    background: url("../img/serarator.png") no-repeat center center;
+    width: 4px;
+    padding: 0px;
+}
+
+li#btn_player_play_pause{
+
+}
+
+li#btn_player_play_pause.play, li#btn_player_play_pause.stop{
+    background: url("../img/btn_small_play.png") no-repeat center center;
+}
+
+li#btn_player_play_pause.pause{
+    background: url("../img/btn_small_pause.png") no-repeat center center;
+}
+
+div#btn_control_center.pause{
+    background: url("../img/btn_pause.png") no-repeat;
+}
+
+div#bar_controls{
+    height: 88px;
+    width: 100%;
+    bottom: 40px;
+    background: url("../img/bg_player_bot.png") repeat-x bottom left;
+}
+
+div#bar_progress{
+    height: 22px;
+    top: 0px;
+    width: 100%;
+    background: url("../img/bg_timeline.png") repeat-x;
+    display: none;
+}
+
