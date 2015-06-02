@@ -7,7 +7,7 @@ var player = {
     playState: "stopped",
     settings: {
         width: "100%",
-        height: "100%"
+        height: "inherit"
     },
 
     get: function(){

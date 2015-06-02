@@ -39,6 +39,7 @@ var App = function( player, html ){
         this.html.btn_control_center.onclick =
             this.html.btn_player_play_pause.onclick = function(e){
                 a.togglePlaying(e.target);
+                e.stopPropagation();
         };
 
         // add player
@@ -47,7 +48,7 @@ var App = function( player, html ){
         this.html.container_player.onclick = function(e){
             a.fadeoutTimer = 0;
             a.showAll();
-            //a.togglePlaying(a.html.btn_control_center);
+            a.togglePlaying(a.html.btn_control_center);
         };
 
         document.onkeydown = function(e){
