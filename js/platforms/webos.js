@@ -7,7 +7,8 @@ var player = {
     playState: "stopped",
     settings: {
         width: "100%",
-        height: "inherit"
+        height: "inherit",
+        autoplay: true
     },
 
     get: function(){
@@ -17,6 +18,8 @@ var player = {
         this.instance.style.width = this.settings.width;
         this.instance.style.height = this.settings.height;
         //this.instance.controls = "controls";
+        if( this.settings.autoplay )
+            this.instance.autoplay = true;
 
         this.instance.onabort = function(e){
             that.playState = "stopped";
@@ -73,5 +76,27 @@ var player = {
 
     fast_forward: function(){
 
+    }
+};
+
+var controls = function(event, app){
+
+    switch(event.keyCode ){
+
+        case 13: // ok btn
+            app.togglePlaying(app.html.btn_control_center);
+            break;
+
+        case 33: // play
+            app.play();
+            break;
+
+        case 34: // pause
+            app.pause();
+            break;
+
+        case 35: // stop
+            app.stop();
+            break;
     }
 };

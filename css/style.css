@@ -13,7 +13,7 @@ div#container{
 }
 
 div#bar_bot_menu, div#btn_control_center, div#bar_controls,
-ul#container_btn_player{
+ul#container_btn_player, img#buffering{
     position: absolute;
 }
 
@@ -32,6 +32,16 @@ div#btn_control_center{
     top: 50%;
     margin-top: -82px;
     z-index: 100;
+}
+
+img#buffering{
+    width: 200px;
+    height: 200px;
+    top: 50%;
+    margin-top: -100px;
+    left: 50%;
+    margin-left: -100px;
+    z-index: 99;
 }
 
 div#btn_control_center.play, div#btn_control_center.stop{
@@ -90,6 +100,10 @@ div#bar_progress{
     top: 0px;
     width: 100%;
     background: url("../img/bg_timeline.png") repeat-x;
+    display: none;
+}
+
+.hidden {
     display: none;
 }
 

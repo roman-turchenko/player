@@ -1,13 +1,16 @@
 /**
+ * Created by roman on 07.06.2015.
+ */
+/**
  * Created by roman on 31.05.2015.
  */
 var player = {
 
-    instance: document.createElement("object"),
+    instance: document.createElement("video"),
     playState: "stopped",
     settings: {
-        width: "1280",
-        height: "720",
+        width: "100%",
+        height: "inherit",
         autoplay: true
     },
 
@@ -15,43 +18,45 @@ var player = {
 
         var that = this;
 
-        this.instance.width = this.settings.width;
-        this.instance.height = this.settings.height;
+        this.instance.id = "mediaobject";
+        this.instance.style.width = this.settings.width;
+        this.instance.style.height = this.settings.height;
 
         if( this.settings.autoplay )
-            this.instance.autoStart = true;
+            this.instance.autoplay = true;
 
-        this.instance.type = "video/x-ms-wmv";
-        this.instance.id = "player";
         this.instance.onPlayStateChange = function(e){
-            switch (e.playState){
-                case 0: that.playState = "stopped";  break;
+
+            switch (that.instance.playState)
+            {
+                case 5: that.playState = "finished"; break;
+                case 0: that.playState = "stopped"; break;
+                case 6: that.playState = "error"; break;
                 case 1: that.playState = "playing"; break;
                 case 2: that.playState = "paused"; break;
                 case 3: that.playState = "connecting"; break;
                 case 4: that.playState = "buffering"; break;
-                case 5: that.playState = "finished"; break;
-                case 6: that.playState = "error"; break;
             }
         };
 
         return this.instance;
     },
 
-    setSrc: function(src){
-        this.instance.data = src;
+    setSrc: function( src ){
+
+        this.instance.src = src;
     },
 
     stop: function(){
-        this.instance.stop();
+        this.stop();
     },
 
     play: function(){
-        this.instance.play(1);
+        this.instance.play();
     },
 
     pause: function(){
-        this.instance.play(0)
+        this.instance.play(0);
     },
 
     rewind: function(){
@@ -67,23 +72,19 @@ var controls = function(event, app){
 
     switch(event.keyCode ){
 
-        case 20: // ok btn
+        case 13: // ok btn
             app.togglePlaying(app.html.btn_control_center);
             break;
 
-        case 23: //back
-            NetCast.back();
-            break;
-
-        case 33: // play
+        case VK_PLAY: // play
             app.play();
             break;
 
-        case 34: // pause
+        case VK_PAUSE: // pause
             app.pause();
             break;
 
-        case 35: // stop
+        case VK_STOP: // stop
             app.stop();
             break;
     }

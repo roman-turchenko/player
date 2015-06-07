@@ -1,26 +1,34 @@
 /**
  * Created by roman on 31.05.2015.
  */
-var App = function( player, html ){
+var App = function( player, html, src, controls ){
 
 
-    this.html = html, this.player = player; var a = this;
+    this.html = html,
+    this.player = player,
+    this.src = src,
+    this.controls = controls;
+
+    var a = this;
 
     this.settings = {
         fadeout: 4
     };
 
     this.fadeoutTimer = 0;
+
+    // Hide central button after "fadeout" seconds
     this.interval = setInterval(function(){
 
-        if( a.player.playState == "playing" ) {
-            if( ++a.fadeoutTimer >= a.settings.fadeout )
-                a.hideAll();
+        if( a.player.playState == "buffering" ){
+            a.html.buffering.classList.remove("hidden");
         }else{
-            a.fadeoutTimer = 0;
+            a.html.buffering.classList.add("hidden");
         }
 
-    }, 1000);
+        if( ++a.fadeoutTimer >= a.settings.fadeout && !a.html.btn_control_center.classList.contains("play") || !a.html.buffering.classList.contains("hidden") )
+            a.hideAll();
+    }, 500);
 
     this.init = function(){
 
@@ -29,33 +37,26 @@ var App = function( player, html ){
         // create html
         this.html.create();
 
-        // add to the document
+        // add html to the document
         this.document.body.appendChild(this.html.container);
 
         // add src video
         this.player.setSrc(this.src);
 
-        // add handler to controll btns
-        this.html.btn_control_center.onclick =
-            this.html.btn_player_play_pause.onclick = function(e){
-                a.togglePlaying(e.target);
-                e.stopPropagation();
-        };
-
         // add player
         this.html.container_player.appendChild(this.player.get());
 
+        this.html.btn_control_center.onclick =
         this.html.container_player.onclick = function(e){
-            a.fadeoutTimer = 0;
-            a.showAll();
             a.togglePlaying(a.html.btn_control_center);
         };
 
+        // apply controls depends on platform
         document.onkeydown = function(e){
-            a.fadeoutTimer = 0;
-            a.showAll();
-            a.togglePlaying(a.html.btn_control_center);
+            a.controls( e, a );
         };
+
+        a.hideAll();
     };
 
     window.onload = this.init;
@@ -66,33 +67,43 @@ var App = function( player, html ){
 App.prototype = {
 
     play: function(){
-        this.html.btn_control_center.classList.remove("play");
-        this.html.btn_control_center.classList.add("pause");
-        this.html.btn_player_play_pause.classList.remove("play");
-        this.html.btn_player_play_pause.classList.add("pause");
-        this.player.play();
+
+        if( this.html.btn_control_center.classList.contains("play") ){
+
+            this.html.btn_control_center.classList.remove("play");
+            this.html.btn_control_center.classList.add("pause");
+
+            this.html.buffering.classList.add("hidden");
+
+            this.fadeoutTimer = 0;
+            this.showAll();
+
+            this.player.play();
+        }
     },
 
     pause: function(){
-        this.html.btn_control_center.classList.remove("pause");
-        this.html.btn_control_center.classList.add("play");
-        this.html.btn_player_play_pause.classList.remove("pause");
-        this.html.btn_player_play_pause.classList.add("play");
-        this.player.pause();
+
+        if( this.html.btn_control_center.classList.contains("pause") ) {
+
+            this.html.btn_control_center.classList.remove("pause");
+            this.html.btn_control_center.classList.add("play");
+
+            this.html.buffering.classList.add("hidden");
+
+            this.fadeoutTimer = 0;
+            this.showAll();
+
+            this.player.pause();
+        }
     },
 
     hideAll: function(){
-
-        this.html.bar_bot_menu.style.visibility =
-            this.html.bar_controls.style.visibility =
-                this.html.btn_control_center.style.visibility = "hidden";
+        this.html.btn_control_center.classList.add("hidden");
     },
 
     showAll: function(){
-
-        this.html.bar_bot_menu.style.visibility =
-            this.html.bar_controls.style.visibility =
-                this.html.btn_control_center.style.visibility = "visible";
+        this.html.btn_control_center.classList.remove("hidden");
     },
 
     togglePlaying: function(elem){
@@ -103,7 +114,3 @@ App.prototype = {
             this.play();
     }
 };
-
-//var src = "http://tvhope.cdnvideo.ru/tvhope-pull/tvhope_1/playlist.m3u8";
-var src = "http://upload.wikimedia.org/wikipedia/commons/4/41/Big_Buck_Bunny_medium.ogv";
-var app = new App(player, html, src);
