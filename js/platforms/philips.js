@@ -6,11 +6,11 @@
  */
 var player = {
 
-    instance: document.createElement("video"),
+    instance: document.createElement("object"),
     playState: "stopped",
     settings: {
-        width: "100%",
-        height: "inherit",
+        width: 1280,
+        height: 720,
         autoplay: true
     },
 
@@ -19,11 +19,10 @@ var player = {
         var that = this;
 
         this.instance.id = "mediaobject";
-        this.instance.style.width = this.settings.width;
-        this.instance.style.height = this.settings.height;
-
-        if( this.settings.autoplay )
-            this.instance.autoplay = true;
+        this.instance.type = "application/vnd.apple.mpegurl";
+        //this.instance.type = "video/mpeg4";
+        this.instance.width = this.settings.width;
+        this.instance.height = this.settings.height;
 
         this.instance.onPlayStateChange = function(e){
 
@@ -44,7 +43,7 @@ var player = {
 
     setSrc: function( src ){
 
-        this.instance.src = src;
+        this.instance.data = src;
     },
 
     stop: function(){

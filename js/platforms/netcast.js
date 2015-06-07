@@ -6,8 +6,8 @@ var player = {
     instance: document.createElement("object"),
     playState: "stopped",
     settings: {
-        width: "1280",
-        height: "720",
+        width: 1280,
+        height: 720,
         autoplay: true
     },
 
