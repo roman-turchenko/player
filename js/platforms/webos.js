@@ -21,33 +21,13 @@ var player = {
         if( this.settings.autoplay )
             this.instance.autoplay = true;
 
-        this.instance.onabort = function(e){
-            that.playState = "stopped";
-        };
-
-        this.instance.onended = function(e){
-            that.playState = "finished";
-        };
-
-        this.instance.onplaying = function(e){
-            that.playState = "playing";
-        };
-
-        this.instance.onpause = function(e){
-            that.playState = "paused";
-        };
-
-        this.instance.onloadstart = function(e){
-            that.playState = "connecting";
-        };
-
-        this.instance.onwaiting = function(e){
-            that.playState = "buffering";
-        };
-
-        this.instance.onerror = function(e){
-            that.playState = "error";
-        };
+        this.instance.addEventListener("abort", function(e){ that.playState = "stopped"; });
+        this.instance.addEventListener("ended", function(e){ that.playState = "finished"; });
+        this.instance.addEventListener("playing", function(e){ that.playState = "playing"; });
+        this.instance.addEventListener("pause", function(e){ that.playState = "paused"; });
+        this.instance.addEventListener("loadstart", function(e){ that.playState = "connecting"; });
+        this.instance.addEventListener("waiting", function(e){ that.playState = "buffering"; });
+        this.instance.addEventListener("error", function(e){ that.playState = "error"; });
 
         return this.instance;
     },
@@ -87,16 +67,16 @@ var controls = function(event, app){
             app.togglePlaying(app.html.btn_control_center);
             break;
 
-        case 33: // play
+        case 415: // play
             app.play();
             break;
 
-        case 34: // pause
+        case 19: // pause
             app.pause();
             break;
-
+/*
         case 35: // stop
             app.stop();
-            break;
+            break;*/
     }
 };

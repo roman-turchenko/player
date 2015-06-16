@@ -1,0 +1,10 @@
+{
+"id": "tv.hope.smart",
+"version": "1.0.0",
+"vendor": "apple",
+"type": "web",
+"main": "index.html",
+"title": "player test",
+"icon": "icon.png",
+"description": "hope"
+}

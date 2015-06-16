@@ -20,13 +20,22 @@ var App = function( player, html, src, controls ){
     // Hide central button after "fadeout" seconds
     this.interval = setInterval(function(){
 
-        if( a.player.playState == "buffering" ){
+        if( a.player.playState == "buffering" || a.player.playState == "connecting" ||
+            a.player.playState == "stopped" || a.player.playState == "error" &&
+            a.html.btn_control_center.classList.contains("pause")
+        ){
+
+            console.log(a.player.playState);
             a.html.buffering.classList.remove("hidden");
         }else{
+            console.log(a.player.playState);
             a.html.buffering.classList.add("hidden");
         }
 
-        if( ++a.fadeoutTimer >= a.settings.fadeout && !a.html.btn_control_center.classList.contains("play") || !a.html.buffering.classList.contains("hidden") )
+        if( ++a.fadeoutTimer >= a.settings.fadeout &&
+            !a.html.btn_control_center.classList.contains("play") ||
+            !a.html.buffering.classList.contains("hidden") )
+
             a.hideAll();
     }, 500);
 

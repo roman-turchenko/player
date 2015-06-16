@@ -24,7 +24,7 @@ var player = {
         this.instance.type = "video/x-ms-wmv";
         this.instance.id = "player";
         this.instance.onPlayStateChange = function(e){
-            switch (e.playState){
+            switch (that.instance.playState){
                 case 0: that.playState = "stopped";  break;
                 case 1: that.playState = "playing"; break;
                 case 2: that.playState = "paused"; break;
@@ -67,24 +67,24 @@ var controls = function(event, app){
 
     switch(event.keyCode ){
 
-        case 20: // ok btn
+        case 13: // ok btn
             app.togglePlaying(app.html.btn_control_center);
             break;
 
-        case 23: //back
-            NetCast.back();
+        case 461: //back
+            NetCastBack();
             break;
 
-        case 33: // play
+        case 415: // play
             app.play();
             break;
 
-        case 34: // pause
+        case 19: // pause
             app.pause();
             break;
-
-        case 35: // stop
+/*
+        case 413: // stop
             app.stop();
-            break;
+            break;*/
     }
 };
