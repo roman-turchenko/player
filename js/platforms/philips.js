@@ -82,9 +82,9 @@ var controls = function(event, app){
         case VK_PAUSE: // pause
             app.pause();
             break;
-
+/*
         case VK_STOP: // stop
             app.stop();
-            break;
+            break;*/
     }
 };
