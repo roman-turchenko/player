@@ -51,7 +51,7 @@ var player = {
     },
 
     play: function(){
-        this.instance.play();
+        this.instance.play(1);
     },
 
     pause: function(){
