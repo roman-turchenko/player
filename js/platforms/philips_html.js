@@ -21,6 +21,8 @@ var player = {
         if( this.settings.autoplay )
             this.instance.autoplay = true;
 
+        this.instance.type = "application/vnd.apple.mpegurl";
+
         this.instance.addEventListener("abort", function(e){ that.playState = "stopped"; });
         this.instance.addEventListener("ended", function(e){ that.playState = "finished"; });
         this.instance.addEventListener("playing", function(e){ that.playState = "playing"; });
@@ -67,15 +69,15 @@ var controls = function(event, app){
             app.togglePlaying(app.html.btn_control_center);
             break;
 
-        case 415: // play
+        case VK_PLAY: // play
             app.play();
             break;
 
-        case 19: // pause
+        case VK_PAUSE: // pause
             app.pause();
             break;
         /*
-         case 35: // stop
+         case VK_STOP: // stop
          app.stop();
          break;*/
     }
