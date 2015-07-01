@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8; supportspointer=true"/>
+    <title>TV app</title>
+    <style>
+
+        body{
+            background: white;
+        }
+    </style>
+</head>
+<body>
+
+    <video src="http://smart.hopetv.ru/click.mp4" type="video/mpeg4" controls id="player"></video>
+    <button id="play">Play</button>
+    <div id="log"></div>
+    <script>
+//http://tvhope.cdnvideo.ru/tvhope-pull/tvhope_1/playlist.m3u8
+        var log = document.getElementById("log");
+        var player = document.getElementById("player");
+        var play = document.getElementById("play");
+
+
+        play.onclick = function(){
+            log.innerText += 'Play...\n\r';
+            player.play();
+        };
+
+        log.innerText += "Start...\n\r";
+
+        player.addEventListener("abort", callback);
+        player.addEventListener("ended", callback);
+        player.addEventListener("playing", callback);
+        player.addEventListener("pause", callback);
+        player.addEventListener("loadstart", callback);
+        player.addEventListener("waiting", callback);
+        player.addEventListener("error", callback);
+
+        document.addEventListener("onkeydown", callback);
+        document.addEventListener("keydown", callback);
+
+        function callback(e){
+            log.innerText += 'Event...'+e.type+'\n\r';
+        }
+    </script>
+</body>
+</html>

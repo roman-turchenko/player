@@ -5,7 +5,7 @@ if( navigator.userAgent.indexOf("Web0S") !== -1 ){
     platform = "webos";
 }else if( navigator.userAgent.indexOf("NetCast") !== -1 ){
     platform = "netcast";
-}else if( navigator.userAgent.indexOf("PHILIPS_OLS") !== -1 ){
+}else if( /.+nettv\/\d+\.\d+\.\d+.+/i.test(navigator.userAgent) ){
     platform = "philips";
 }else if( platform == "browser" )
     platform = "webos";
