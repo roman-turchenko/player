@@ -32,9 +32,9 @@ var player = {
         return this.instance;
     },
 
-    setSrc: function( src ){
+    setSrc: function( _src ){
 
-        this.instance.src = src;
+        this.instance.src = _src;
     },
 
     stop: function(){

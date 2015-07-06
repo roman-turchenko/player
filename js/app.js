@@ -1,13 +1,12 @@
 /**
  * Created by roman on 31.05.2015.
  */
-var App = function( player, html, src, controls ){
+var App = function( _player, _html, _src, _controls ){
 
-
-    this.html = html,
-    this.player = player,
-    this.src = src,
-    this.controls = controls;
+    this.html = _html,
+    this.player = _player,
+    this.src = _src,
+    this.controls = _controls;
 
     var a = this;
 
