@@ -46,7 +46,7 @@ var App = function( _player, _html, _src, _controls ){
         this.html.create();
 
         // add html to the document
-        this.document.body.appendChild(this.html.container);
+        document.body.appendChild(this.html.container);
 
         // add src video
         this.player.setSrc(this.src);
@@ -64,10 +64,10 @@ var App = function( _player, _html, _src, _controls ){
             a.controls( e, a );
         };
 
-        a.hideAll();
+        this.hideAll();
     };
 
-    window.onload = this.init;
+    window.onload = function(e){ a.init(); };
     // disable selection
     window.onselectstart = function(e){ return false; };
 };
