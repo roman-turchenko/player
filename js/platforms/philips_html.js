@@ -73,6 +73,7 @@ var controls = function(event, app){
             app.play();
             break;
 
+        case VK_STOP:
         case VK_PAUSE: // pause
             app.pause();
             break;
