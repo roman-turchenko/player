@@ -70,7 +70,7 @@ var player = {
 var controls = function(event, app){
 
     switch(event.keyCode ){
-
+		case "ok":
         case 13: // ok btn
             app.togglePlaying(app.html.btn_control_center);
             break;

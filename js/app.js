@@ -56,7 +56,8 @@ var App = function( _player, _html, _src, _controls ){
 
         this.html.btn_control_center.onclick =
         this.html.container_player.onclick = function(e){
-            a.togglePlaying(a.html.btn_control_center);
+            //a.togglePlaying(a.html.btn_control_center);
+			a.controls({keyCode: "ok"}, a);
         };
 
         // apply controls depends on platform

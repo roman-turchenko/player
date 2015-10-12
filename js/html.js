@@ -8,6 +8,10 @@ var html = {
     buffering: { tag: "img", childOf: "container_player", src: "./img/ajax_loader.gif", classList: "hidden"},
     btn_control_center: { tag: "div", childOf: "container", className: "pause" },
 
+	networkPopup: { tag: "div", className: "networkPopup hidden", childOf: "container" },
+	networkPopupTitle: { tag: "div", className: "title", innerText: "Cannot connect to network", childOf: "networkPopup" }, 
+	networkPopupOverlay: { tag: "div", className: "networkOverlay hidden", childOf: "container", onclick: function(e){ app.html.hidePopup(); } },
+	networkPopupOk: { tag: "input", type: "button", className: "networkPopupOk", value: "Ok", childOf: "networkPopup", onclick: function(e){ app.html.hidePopup(); } },
 
     //bar_controls: { tag: "div", childOf: "container_player" },
     //container_btn_player: { tag: "ul", childOf: "bar_controls"},
@@ -34,5 +38,15 @@ var html = {
                 this[key] = el;
             }
         }
-    }
+    },
+	
+	hidePopup: function(){
+		this.networkPopup.classList.add("hidden");
+		this.networkPopupOverlay.classList.add("hidden");
+	},
+	
+	showPopup: function(){
+		this.networkPopup.classList.remove("hidden");
+		this.networkPopupOverlay.classList.remove("hidden");
+	}
 };

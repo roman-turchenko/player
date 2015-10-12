@@ -40,6 +40,7 @@ var player = {
     stop: function(){
         this.pause();
         this.instance.currentTime = 0;
+		this.instance.src = "";
     },
 
     play: function(){
@@ -63,8 +64,14 @@ var controls = function(event, app){
 
     switch(event.keyCode ){
 
-        case 13: // ok btn
-            app.togglePlaying(app.html.btn_control_center);
+        case "ok":
+		case 13: // ok btn
+		
+			if ( !app.html.networkPopup.classList.contains("hidden") ){
+				app.html.hidePopup();
+			}else if ( !networkError ){
+				app.togglePlaying(app.html.btn_control_center);
+			}
             break;
 
         case 415: // play
